@@ -13,7 +13,12 @@ const recipeData = {
 };
 
 const page = () => {
-  return <div></div>;
+  return (
+    <div>
+      <div></div>
+      <Navbar></Navbar>
+    </div>
+  );
 };
 
 export default page;
