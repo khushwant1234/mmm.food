@@ -21,8 +21,8 @@ export const Card = React.memo(({ card, index, hovered, setHovered }) => (
     />
     <div
       className={cn(
-        "absolute inset-0 bg-black/50 flex items-end py-8 px-4 transition-opacity duration-300",
-        hovered === index ? "opacity-100" : "opacity-0"
+        "absolute inset-0 bg-black/50 flex items-end py-8 px-4 transition-opacity duration-300 ",
+        hovered === index ? "opacity-100" : "sm:opacity-0"
       )}
     >
       <div className="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
@@ -38,7 +38,7 @@ export function FocusCards({ cards }) {
   const [hovered, setHovered] = useState(null);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 mx-auto md:px-8 gap-3 px-4 w-full mt-7">
+    <div className="grid grid-cols-1 md:grid-cols-4 mx-auto md:px-8 gap-3 px-4 w-full sm:mt-7 mt-1">
       {cards.map((card, index) => (
         <Link href={`/card`} key={card.title}>
           {/* insert link here */}
