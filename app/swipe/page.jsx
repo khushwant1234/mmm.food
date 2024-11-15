@@ -12,17 +12,12 @@ const recipeData = {
   vegan: "0.0",
 };
 import Navbar from "@/components/Navbar";
-import { AnimatedTestimonialsDemo } from "@/components/QuickPageCards";
-import Hero from "@/components/hero";
 
 const page = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div>
-        <Hero></Hero>
-        <AnimatedTestimonialsDemo></AnimatedTestimonialsDemo>
-      </div>
+      <div>swipe</div>
     </div>
   );
 };
