@@ -20,34 +20,34 @@ const Navbar = () => {
         {
           title: "Seasonal Recipes",
           icon: (
-            <Image src="/images/cloud-sun-solid.svg" width={20} height={10} alt="S"/>
+            <Image src="/icons/cloud-sun-solid.svg" width={20} height={10} alt="S"/>
           ),
           href: "#",
         },
         {
           title: "Quick Meals",
           icon: (
-            <Image src="/images/gauge-high-solid.svg" width={20} height={10} alt="S"/>
+            <Image src="/icons/gauge-high-solid.svg" width={20} height={10} alt="S"/>
           ),
-          href: "#",
+          href: "/navigation",
         },
         {
           title: "Leftovers",
           icon: (
-            <Image src="/images/cookie-bite-solid.svg" width={20} height={10} alt="S"/>
+            <Image src="/icons/cookie-bite-solid.svg" width={20} height={10} alt="S"/>
           ),
           href: "#",
         },
         {
           title: "Profile",
           icon: (
-            <Image src="/images/user-regular.svg" width={17} height={10} alt="S"/>
+            <Image src="/icons/user-regular.svg" width={17} height={10} alt="S"/>
           ),
           href: "#",
         },
       ];
   return (
-    <div className='sticky top-0 z-40'>
+    <div className='sticky bottom-0 z-40'>
       <div className="flex items-center justify-center h-14 w-full bottom-4 fixed">
       <FloatingDock
         mobileClassName="translate-y-20" // only for demo, remove for production
