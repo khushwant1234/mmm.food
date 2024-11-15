@@ -1,5 +1,7 @@
+'use client';
+
 import { useState } from "react";
-import { supabase } from "../lib/supabaseClient";
+import { supabase } from "../../lib/supabaseClient";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -16,12 +18,22 @@ const Auth = () => {
   };
 
   const handleEmailSignUp = async () => {
-    const { error } = await supabase.auth.signUp({ email, password });
-    if (error) {
-      console.error("Error signing up with email:", error.message);
-      alert("Error signing up: " + error.message);
-    } else {
-      alert("Check your email for a confirmation link!");
+    try {
+      if (!email || !password) {
+        alert("Please enter both email and password");
+        return;
+      }
+
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        console.error("Error signing up with email:", error.message);
+        alert("Error signing up: " + error.message);
+      } else {
+        alert("Check your email for a confirmation link!");
+      }
+    } catch (error) {
+      console.error("Network or configuration error:", error);
+      alert("Failed to connect to authentication service. Please check your internet connection and try again.");
     }
   };
 
