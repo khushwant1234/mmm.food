@@ -1,42 +1,14 @@
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { getQuickMeals } from "@/app/recommandation_algo/getScore";
 
-export function AnimatedTestimonialsDemo() {
-  const testimonials = [
-    {
-      quote:
-        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
-      name: "Sarah Chen",
+export async function AnimatedTestimonialsDemo() {
+  const quickMeals = await getQuickMeals();
 
-      src: "/images/cookie.png",
-    },
-    {
-      quote:
-        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
-      name: "Michael Rodriguez",
+  const testimonials = quickMeals.slice(0, 5).map((meal, index) => ({
+    quote: `Quick and easy meal that can be prepared in 30 minutes or less!`,
+    name: meal,
+    src: "/images/cookie.png"
+  }));
 
-      src: "/images/cookie.png",
-    },
-    {
-      quote:
-        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-      name: "Emily Watson",
-
-      src: "/images/cookie.png",
-    },
-    {
-      quote:
-        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-      name: "James Kim",
-
-      src: "/images/cookie.png",
-    },
-    {
-      quote:
-        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-      name: "Lisa Thompson",
-
-      src: "/images/cookie.png",
-    },
-  ];
   return <AnimatedTestimonials testimonials={testimonials} />;
 }
