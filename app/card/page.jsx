@@ -13,12 +13,9 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 const page = () => {
-  const words = `Oxygen gets you high. In a catastrophic emergency, we're taking giant, panicked breaths. Suddenly you become euphoric, docile. You accept your fate. It's all right here. Emergency water landing, six hundred miles an hour. Blank faces, calm as Hindu cows
-`;
-
+  const Ingredients = [];
   const [heart, setHeart] = useState("/icons/heart-regular.svg");
 
   const handleHeart = () => {
@@ -101,7 +98,12 @@ const page = () => {
             ))}
           </ul>
 
-          <TextGenerateEffect words={words} />
+          <h2 className="text-xl font-bold mt-6 mb-3">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
+            totam autem, numquam beatae fugit, dolore, enim itaque ex maxime quo
+            voluptatibus laboriosam ipsam. Totam, nulla itaque delectus incidunt
+            nostrum sit.
+          </h2>
 
           <h2 className="text-xl font-bold mt-6 mb-3">Nutritional Value</h2>
           <div className="flex items-center justify-center">
