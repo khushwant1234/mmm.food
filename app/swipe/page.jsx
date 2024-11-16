@@ -11,9 +11,15 @@ const recipeData = {
     "cook||heat||drain||stir||reduce||heat||cover||simmer||sprinkle||cook",
   vegan: "0.0",
 };
+import Navbar from "@/components/Navbar";
 
 const page = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Navbar></Navbar>
+      <div>swipe</div>
+    </div>
+  );
 };
 
 export default page;
