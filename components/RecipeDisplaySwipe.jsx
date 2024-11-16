@@ -23,7 +23,7 @@ const RecipeDisplaySwipe = () => {
 
   return (
     <div className="h-screen w-full flex items-center justify-center bg-gray-100">
-      <div className="relative w-full h-full sm:w-1/3 sm:h-3/4">
+      <div className="relative w-full h-full sm:w-80 sm:h-96">
         <AnimatePresence>
           {cards.length > 0 && (
             <motion.div
@@ -52,20 +52,20 @@ const RecipeDisplaySwipe = () => {
                 transition: { duration: 0.2 },
               }}
             >
-              <Link href={`/`}>
-                <Image
-                  src="/images/pizza.png"
-                  alt="pizza"
-                  draggable="false"
-                  fill
-                ></Image>
+              <Image
+                src="/images/pizza.png"
+                alt="pizza"
+                draggable="false"
+                fill
+              ></Image>
 
-                <div className=" absolute bottom-0 h-12 w-full rounded-2xl items-center bg-transparent backdrop-blur-lg  justify-center text-2xl font-bold">
+              <div className=" absolute bottom-0 h-12 w-full rounded-2xl items-center bg-transparent backdrop-blur-lg  justify-center text-2xl font-bold">
+                <Link href={`/`}>
                   <p className="absolute bottom-3 left-3 bg-transparent rounded-2xl backdrop-blur-lg ">
                     {cards[0].content}
                   </p>
-                </div>
-              </Link>
+                </Link>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
