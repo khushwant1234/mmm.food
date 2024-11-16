@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import { FocusCards } from "@/components/ui/focus-cards";
 
 const page = () => {
-  const [visible, setVisible] = useState("hidden");
   const cards = [
     {
       title: "Forest Adventure",
