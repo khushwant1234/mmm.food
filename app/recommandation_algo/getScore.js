@@ -132,49 +132,7 @@ export async function getRecommendations(userID) {
         for (let i = 0; i < recipeData.payload.data.length; i++) {
             recipeString += `${recipeData.payload.data[i].Recipe_title}, ` ;
         }
-
-        // Step 2: Fetch ingredients for each recipe
-        // for (let i = 0; i < recipeData.payload.data.length; i++) {
-        //     try {
-        //         const recipeDetailsResponse = await fetch(
-        //             `https://cosylab.iiitd.edu.in/recipe/${recipeData.payload.data[i].Recipe_id}`,
-        //             {
-        //                 method: 'GET',
-        //                 headers: {
-        //                     'Content-Type': 'application/json',
-        //                     'Accept': '*/*',
-        //                 },
-        //             }
-        //         );
-        //         console.log(recipeDetailsResponse);
-        //         try{
-        //             recipeDetailsResponse.json();
-        //         }
-        //         catch(error){
-        //             console.log(`https://cosylab.iiitd.edu.in/recipe/${recipeData.payload.data[i].Recipe_id}`);
-        //             console.error(`Error fetching recipe details for Recipe ID ${recipeData.payload.data[i].Recipe_id}:`, error);
-        //             return;
-        //         }
-        //         const recipeDetails = await recipeDetailsResponse.json();
-        //         console.log('Recipe Details:', recipeDetails);
-
-        //         // Collect ingredients
-        //         const ingredients = recipeDetails.payload.ingredients.map(
-        //             (ingredient) => ingredient.ingredient
-        //         );
-        //         recipeObject[recipeData.payload.data[i].Recipe_title] = ingredients;
-        //     } catch (innerError) {
-        //         console.log(`https://cosylab.iiitd.edu.in/recipe/${recipeData.payload.data[i].Recipe_id}`);
-        //         console.error(`Error fetching recipe details for Recipe ID ${recipeData.payload.data[i].Recipe_id}:`, innerError);
-        //     }
-        // }
-
-        // Step 3: Use Gemini API for recommendations
         const geminiKey = process.env.GEMINI_API_KEY;
-        // console.log(`Give me the name of the best 10 recipes in a list like ["recipe1", "recipe2", "recipe3", ...] based on what I like, only a list with no other text or nothing. Use these scores ${JSON.stringify(
-        //                                 score
-        //                             )} and the list of foods ${recipeString}. Use the relative score to each other to find the best matches.`,
-        // );
         const geminiResponse = await fetch(
             `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${geminiKey}`,
             {
@@ -209,79 +167,19 @@ export async function getRecommendations(userID) {
         throw error; // Ensure the error propagates for debugging
     }
 }
-// export async function getRecommendations(userID) {
-//     const score = await fetchScore(userID);
-//     console.log("Score ahhh: ");
-//     console.log(score);
-//     var recipeObject = {};
-//     var recommendations = {};
-//     //make a post request
-//     fetch('https://cosylab.iiitd.edu.in/recipe-search/recipesByIngredient?page=1&pageSize=50', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             ingredientNotUsed: "",
-//         })
-//     })
-//         .then(response => response.json())
-//         .then(data => {
 
-//             console.log('Success:', data);
-//             for (var i = 0; i < data.payload.data.length; i++) {
-//                 console.log("https://cosylab.iiitd.edu.in/recipe/"+data.payload.data[i].Recipe_id); 
-//                 fetch("https://cosylab.iiitd.edu.in/recipe/"+data.payload.data[i].Recipe_id,{
-//                     method: 'GET',
-//                     headers: {
-//                         'Content-Type': 'application/json',
-//                         'Accept': "*/*"
-//                     },
-//                 }) .then(responseIngridients => responseIngridients.json())
-//                     .then(dataIngridients => {
-//                         console.log('SuccessBOOOO:', data);
-//                         console.log(dataIngridients.payload.ingredients);
-//                         var ingredients = [];
-//                         for (var i = 0; i < dataIngridients.payload.ingredients.length; i++){
-//                             ingredients.push(dataIngridients.payload.ingredients[i].ingredient);
-//                         }
-//                         recipeObject[data.payload.data[i].Recipe_title] = ingredients;
-//                     })
-//                     .catch((error) => {
-//                         console.error('Error:', error);
-//                     });
-//             }
-//             // console.log(recipeObject);
-//             // feed in the recipeObject and the score to gemini and ask it to find the best 10 recepies from this list that matchees with the relative score
-//             fetch("")
+export async function getQuickMeals(){
+    const quickMealsResponse = await fetch('https://cosylab.iiitd.edu.in/recipe-search/recipesByIngredient?page=1&pageSize=50', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ingredientNotUsed: "" }),
+    });
 
-//         }).then(responseDone => responseDone.json())
-//         .then(dataDone => {
-//             fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${geminiKey}`, {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 body: JSON.stringify({
-//                     contents:[{
-//                         parts: [{
-//                             text: {
-//                                 content: `Give me the name of the best 10 recipe in a list like [\"recipe1\", \"recipe2\", \"recipe3\", ...] based on what i like, to know what i like use these scores ${score} and the list of recipes i have is ${recipeObject}. use the relative score to each other and find the dish that matches my taste.`,
-//                             }
-//                         }]
-//                     }]
-//                 })
-//             })
-//                 .then(response => response.json())
-//                 .then(dataRecommend => {
-//                     // console.log('Success:', dataRecommend);
-//                     recommendations = dataRecommend.candidates[0].content.parts[0].text;
-//                 })
-//                 .catch((error) => {
-//                     console.error('ErrorHELLO:', error);
-//                 });
-//         })
-//         .catch((error) => {
-//             console.error('ErrorHIII:', error);
-//         });
-    
+    const quickMealsData = await quickMealsResponse.json();
+    const quickMeals = quickMealsData.payload.data.filter(recipe => {
+        return parseInt(recipe.total_time) <= 30; // Convert total_time to integer for comparison
+    }).map(recipe => recipe.Recipe_title); // Extract the recipe titles
+
+    console.log('Quick Meals:', quickMeals);
+    return quickMeals;
+}
