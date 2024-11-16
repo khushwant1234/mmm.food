@@ -1,9 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
-const RecipeDisplaySwipe = () => {
+
+const Page = () => {
   const [direction, setDirection] = useState(null);
   const [cards, setCards] = useState([
     { id: 1, content: "Card 1" },
@@ -23,12 +22,12 @@ const RecipeDisplaySwipe = () => {
 
   return (
     <div className="h-screen w-full flex items-center justify-center bg-gray-100">
-      <div className="relative w-full h-full sm:w-1/3 sm:h-3/4">
+      <div className="relative w-80 h-96">
         <AnimatePresence>
           {cards.length > 0 && (
             <motion.div
               key={cards[0].id}
-              className="absolute w-full h-full bg-white rounded-2xl shadow-xl cursor-grab overflow-hidden"
+              className="absolute w-full h-full bg-white rounded-2xl shadow-xl cursor-grab"
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={1}
@@ -52,20 +51,9 @@ const RecipeDisplaySwipe = () => {
                 transition: { duration: 0.2 },
               }}
             >
-              <Link href={`/`}>
-                <Image
-                  src="/images/pizza.png"
-                  alt="pizza"
-                  draggable="false"
-                  fill
-                ></Image>
-
-                <div className=" absolute bottom-0 h-12 w-full rounded-2xl items-center bg-transparent backdrop-blur-lg  justify-center text-2xl font-bold">
-                  <p className="absolute bottom-3 left-3 bg-transparent rounded-2xl backdrop-blur-lg ">
-                    {cards[0].content}
-                  </p>
-                </div>
-              </Link>
+              <div className="w-full h-full flex items-center justify-center text-2xl font-bold">
+                {cards[0].content}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -74,4 +62,4 @@ const RecipeDisplaySwipe = () => {
   );
 };
 
-export default RecipeDisplaySwipe;
+export default Page;
