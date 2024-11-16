@@ -1,4 +1,3 @@
-
 import { createClient } from '../../lib/supabase/server'
 import { cookies } from 'next/headers'
 
@@ -155,16 +154,29 @@ export async function getRecommendations(userID) {
         );
 
         const geminiData = await geminiResponse.json();
+
+        // Add validation for the API response
+        if (!geminiData?.candidates?.[0]?.content?.parts?.[0]?.text) {
+            console.error('Unexpected Gemini API response:', geminiData);
+            throw new Error('Invalid response from Gemini API');
+        }
+
         recommendations = geminiData.candidates[0].content.parts[0].text;
         recommendations = recommendations.replace(/```json|```/g, '');
-        const recommendationsList = JSON.parse(recommendations);
 
-        console.log('Recommendations:', recommendationsList);
-
-        return recommendations;
+        // Add try-catch for JSON parsing
+        try {
+            const recommendationsList = JSON.parse(recommendations);
+            console.log('Recommendations:', recommendationsList);
+            return recommendations;
+        } catch (error) {
+            console.error('Failed to parse recommendations:', recommendations);
+            throw new Error('Invalid JSON response from Gemini API');
+        }
     } catch (error) {
         console.error('Error in getRecommendations:', error);
-        throw error; // Ensure the error propagates for debugging
+        // Return a default value or rethrow based on your needs
+        return []; // or throw error;
     }
 }
 
