@@ -34,8 +34,8 @@ const page = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div className="flex flex-wrap sm:items-center justify-center h-screen">
-        <div className="sm:w-1/2 w-full mx-2 sm:mx-0 h-full overflow-hidden relative">
+      <div className="flex flex-wrap sm:items-center justify-center  h-screen">
+        <div className="sm:w-1/2 w-full mx-2 sm:mx-0 h-full  overflow-hidden relative">
           <Image
             src="/images/cookie.png"
             alt="card"
